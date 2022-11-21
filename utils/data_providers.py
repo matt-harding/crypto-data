@@ -7,8 +7,9 @@ from datetime import datetime, timedelta
 import requests
 
 QUOTE_CURRENCY = 'usd'
-COINMARKETCAP_API_KEY = '1fb4a911-50e9-4685-bd6c-5182699bbb86'
-CRYPTOCOMPARE_API_KEY = 'bafc411354db9bb7ea7b67f06ca4fb1d485169fb5c54d860e236b7116f0a2094'
+COINMARKETCAP_API_KEY = 'INSERT YOUR API KEY HERE'
+CRYPTOCOMPARE_API_KEY = 'INSERT YOUR API KEY HERE'
+
 
 def fetch_data_from_coin_gecko(coin_ids: list) -> list:
     """Fetches the data from CoinGecko API and returns it as a list of StableCoin objects"""
@@ -22,6 +23,7 @@ def fetch_data_from_coin_gecko(coin_ids: list) -> list:
             if coin_data['id'] in coin_ids:
                 coin = StableCoin()
                 coin.id = coin_data['id']
+                coin.data_provider = 'CoinGecko'
                 coin.symbol = coin_data['symbol']
                 coin.name = coin_data['name']
                 coin.market_cap = coin_data['market_cap']
@@ -37,6 +39,7 @@ def fetch_data_from_coin_gecko(coin_ids: list) -> list:
 
     return coins
 
+
 def fetch_data_from_coin_market_cap(coin_ids: list) -> list:
     """Fetches the data from CoinMarketCap API and returns it as a list of StableCoin objects"""
     coins = []
@@ -46,11 +49,12 @@ def fetch_data_from_coin_market_cap(coin_ids: list) -> list:
         rep = cmc.cryptocurrency_listings_latest()
 
         coins = []
-        
+
         for coin_data in rep.data:
             if coin_data['symbol'] in coin_ids:
                 coin = StableCoin()
                 coin.id = coin_data['id']
+                coin.data_provider = 'CoinMarketCap'
                 coin.symbol = coin_data['symbol']
                 coin.name = coin_data['name']
                 coin.market_cap = coin_data['quote']['USD']['market_cap']
@@ -66,6 +70,7 @@ def fetch_data_from_coin_market_cap(coin_ids: list) -> list:
         print(e)
 
     return coins
+
 
 def fetch_data_from_coin_metrics(coin_ids: list) -> list:
     """Fetches the data from CoinMetrics API and returns it as a list of StableCoin objects"""
@@ -85,6 +90,7 @@ def fetch_data_from_coin_metrics(coin_ids: list) -> list:
 
         for coin_data in asset_metrics:
             coin = StableCoin()
+            coin.data_provider = 'CoinMetrics'
             coin.symbol = coin_data['asset']
             coin.market_cap = coin_data['CapMrktCurUSD']
             coin.price = coin_data['PriceUSD']
@@ -97,6 +103,7 @@ def fetch_data_from_coin_metrics(coin_ids: list) -> list:
 
     return coins
 
+
 def fetch_data_from_crypto_compare(coin_ids: list) -> list:
     """Fetches the data from CryptoCompare API and returns it as a list of StableCoin objects"""
     coins = []
@@ -104,7 +111,10 @@ def fetch_data_from_crypto_compare(coin_ids: list) -> list:
     try:
         url = "https://min-api.cryptocompare.com/data/pricemultifull"
 
-        querystring = {"fsyms":','.join(coin_ids),"tsyms":'usd',"api_key":CRYPTOCOMPARE_API_KEY}
+        querystring = {
+            "fsyms": ','.join(coin_ids),
+            "tsyms": 'usd',
+            "api_key": CRYPTOCOMPARE_API_KEY}
 
         response = requests.request("GET", url, params=querystring)
 
@@ -112,6 +122,7 @@ def fetch_data_from_crypto_compare(coin_ids: list) -> list:
 
         for coin_symbol in coin_ids:
             stablecoin = StableCoin()
+            stablecoin.data_provider = 'CryptoCompare'
             stablecoin.id = data['RAW'][coin_symbol]['USD']['FROMSYMBOL']
             stablecoin.symbol = data['RAW'][coin_symbol]['USD']['FROMSYMBOL']
             stablecoin.market_cap = data['RAW'][coin_symbol]['USD']['MKTCAP']
@@ -124,8 +135,9 @@ def fetch_data_from_crypto_compare(coin_ids: list) -> list:
 
     except Exception as e:
         print(e)
-    
+
     return coins
+
 
 def fetch_data_from_on_chain_fx(coin_ids: list) -> list:
     """Fetches the data from OnChainFX API and returns it as a list of StableCoin objects"""
@@ -140,6 +152,7 @@ def fetch_data_from_on_chain_fx(coin_ids: list) -> list:
         for asset in coin_ids:
             coin = StableCoin()
             coin.id = asset
+            coin.data_provider = 'OnChainFX'
             coins.append(coin)
 
         for coin in coins:
@@ -156,6 +169,5 @@ def fetch_data_from_on_chain_fx(coin_ids: list) -> list:
 
     except Exception as e:
         print(e)
-    
-    return coins
 
+    return coins

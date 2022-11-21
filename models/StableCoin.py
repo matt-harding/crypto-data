@@ -4,6 +4,7 @@ from dataclasses import dataclass
 class StableCoin:
     """Class for condensing exchange data to just the props we care about"""
     id: str = ''
+    data_provider: str = ''
     symbol: str = ''
     name: str = ''
     market_cap: float = 0

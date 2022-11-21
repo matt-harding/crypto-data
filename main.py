@@ -17,7 +17,7 @@ def get_coin_ids(exchange_name: str) -> list:
             'usd-coin',
             'binance-usd',
             'dai',
-            #'usdp',
+            # 'usdp',
             'gemini-dollar',
             'true-usd']
     elif exchange_name == 'CoinMarketCap':
@@ -38,7 +38,7 @@ def get_coin_ids(exchange_name: str) -> list:
             'usd-coin',
             'binance-usd',
             'dai',
-            #'usdp',
+            # 'usdp',
             'gemini-dollar',
             'tusd']
 
@@ -60,14 +60,14 @@ def get_coin_data(exchange_name: str) -> list:
 
 # python main function
 if __name__ == '__main__':
-    coin_dict = {}
+    all_data = []
     for data_provider in TARGET_DATA_PROVIDERS:
         print(f"Fetching data from {data_provider}")
         coins = get_coin_data(data_provider)
-        coin_dict[data_provider] = coins
+        all_data.extend(coins)
 
-    df = pd.DataFrame.from_dict(coin_dict)
+    df = pd.DataFrame(all_data)
     print(df)
 
-     # export df to excel
+    # export df to excel
     df.to_excel('stablecoins.xlsx')
