@@ -5,9 +5,10 @@ from utils.data_providers import fetch_data_from_coin_gecko, fetch_data_from_coi
 TARGET_DATA_PROVIDERS = [
     'CoinGecko',
     'CoinMarketCap',
-    'CoinMetrics',
+    #'CoinMetrics',
     'CryptoCompare',
-    'OnChainFX']
+    'OnChainFX'
+]
 
 def get_coin_ids(exchange_name: str) -> list:
     # switch statement for different exchanges
@@ -17,6 +18,8 @@ def get_coin_ids(exchange_name: str) -> list:
             'usd-coin': StableCoin(symbol='USDC', name='USD Coin', data_provider='CoinGecko'),
             'binance-usd': StableCoin(symbol='BUSD', name='Binance USD', data_provider='CoinGecko'),
             'dai': StableCoin(symbol='DAI', name='Dai', data_provider='CoinGecko'),
+            'frax': StableCoin(symbol='FRAX', name='FRAX', data_provider='CoinGecko'),
+            'paxos-standard': StableCoin(symbol='USDP', name='Pax Dollar', data_provider='CoinGecko'),
             'gemini-dollar': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='CoinGecko'),
             'true-usd': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='CoinGecko'),
         }
@@ -26,6 +29,7 @@ def get_coin_ids(exchange_name: str) -> list:
             'USDC': StableCoin(symbol='USDC', name='USD Coin', data_provider='CoinMarketCap'),
             'BUSD': StableCoin(symbol='BUSD', name='Binance USD', data_provider='CoinMarketCap'),
             'DAI': StableCoin(symbol='DAI', name='Dai', data_provider='CoinMarketCap'),
+            'USDP': StableCoin(symbol='USDP', name='Pax Dollar', data_provider='CoinMarketCap'),
             'GUSD': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='CoinMarketCap'),
             'TUSD': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='CoinMarketCap'),
         }
@@ -35,6 +39,7 @@ def get_coin_ids(exchange_name: str) -> list:
             'usdc': StableCoin(symbol='USDC', name='USD Coin', data_provider='CoinMetrics'),
             'busd': StableCoin(symbol='BUSD', name='Binance USD', data_provider='CoinMetrics'),
             'dai': StableCoin(symbol='DAI', name='Dai', data_provider='CoinMetrics'),
+            'frax': StableCoin(symbol='FRAX', name='FRAX', data_provider='CoinMetrics'),
             'gusd': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='CoinMetrics'),
             'tusd': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='CoinMetrics'),
         }
@@ -44,6 +49,8 @@ def get_coin_ids(exchange_name: str) -> list:
             'USDC': StableCoin(symbol='USDC', name='USD Coin', data_provider='CryptoCompare'),
             'BUSD': StableCoin(symbol='BUSD', name='Binance USD', data_provider='CryptoCompare'),
             'DAI': StableCoin(symbol='DAI', name='Dai', data_provider='CryptoCompare'),
+            'USDP': StableCoin(symbol='USDP', name='Pax Dollar', data_provider='CryptoCompare'),
+            'FRAX': StableCoin(symbol='FRAX', name='FRAX', data_provider='CryptoCompare'),
             'GUSD': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='CryptoCompare'),
             'TUSD': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='CryptoCompare'),
         }
@@ -53,6 +60,8 @@ def get_coin_ids(exchange_name: str) -> list:
             'usd-coin': StableCoin(symbol='USDC', name='USD Coin', data_provider='OnChainFX'),
             'binance-usd': StableCoin(symbol='BUSD', name='Binance USD', data_provider='OnChainFX'),
             'dai': StableCoin(symbol='DAI', name='Dai', data_provider='OnChainFX'),
+            'pax-dollar': StableCoin(symbol='USDP', name='Pax Dollar', data_provider='OnChainFX'),
+            'frax': StableCoin(symbol='FRAX', name='FRAX', data_provider='OnChainFX'),
             'gemini-dollar': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='OnChainFX'),
             'tusd': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='OnChainFX'),
         }
