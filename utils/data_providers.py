@@ -21,12 +21,18 @@ def fetch_data_from_coin_gecko(target_coins: dict) -> list:
         for coin_data in market_data:
             if coin_data['id'] in target_coins.keys():
                 target_coins[coin_data['id']].data_provider = 'CoinGecko'
-                target_coins[coin_data['id']].market_cap = coin_data['market_cap']
-                target_coins[coin_data['id']].circulating_supply = coin_data['circulating_supply']
-                target_coins[coin_data['id']].total_supply = coin_data['total_supply']
-                target_coins[coin_data['id']].twentyfourhour_volume = coin_data['total_volume']
-                target_coins[coin_data['id']].price = coin_data['current_price']
-                target_coins[coin_data['id']].last_updated = coin_data['last_updated']
+                target_coins[coin_data['id']
+                             ].market_cap = coin_data['market_cap']
+                target_coins[coin_data['id']
+                             ].circulating_supply = coin_data['circulating_supply']
+                target_coins[coin_data['id']
+                             ].total_supply = coin_data['total_supply']
+                target_coins[coin_data['id']
+                             ].twentyfourhour_volume = coin_data['total_volume']
+                target_coins[coin_data['id']
+                             ].price = coin_data['current_price']
+                target_coins[coin_data['id']
+                             ].last_updated = coin_data['last_updated']
 
     except Exception as e:
         print(e)
@@ -43,13 +49,20 @@ def fetch_data_from_coin_market_cap(target_coins: dict) -> list:
 
         for coin_data in rep.data:
             if coin_data['symbol'] in target_coins.keys():
-                target_coins[coin_data['symbol']].data_provider = 'CoinMarketCap'
-                target_coins[coin_data['symbol']].market_cap = coin_data['quote']['USD']['market_cap']
-                target_coins[coin_data['symbol']].circulating_supply = coin_data['circulating_supply']
-                target_coins[coin_data['symbol']].total_supply = coin_data['total_supply']
-                target_coins[coin_data['symbol']].twentyfourhour_volume = coin_data['quote']['USD']['volume_24h']
-                target_coins[coin_data['symbol']].price = coin_data['quote']['USD']['price']
-                target_coins[coin_data['symbol']].last_updated = coin_data['last_updated']
+                target_coins[coin_data['symbol']
+                             ].data_provider = 'CoinMarketCap'
+                target_coins[coin_data['symbol']
+                             ].market_cap = coin_data['quote']['USD']['market_cap']
+                target_coins[coin_data['symbol']
+                             ].circulating_supply = coin_data['circulating_supply']
+                target_coins[coin_data['symbol']
+                             ].total_supply = coin_data['total_supply']
+                target_coins[coin_data['symbol']
+                             ].twentyfourhour_volume = coin_data['quote']['USD']['volume_24h']
+                target_coins[coin_data['symbol']
+                             ].price = coin_data['quote']['USD']['price']
+                target_coins[coin_data['symbol']
+                             ].last_updated = coin_data['last_updated']
 
     except Exception as e:
         print(e)
@@ -61,7 +74,8 @@ def fetch_data_from_coin_metrics(target_coins: dict) -> list:
     """Fetches the data from CoinMetrics API and returns it as a list of StableCoin objects"""
     try:
         client = CoinMetricsClient()
-        metrics = ['CapMrktCurUSD', 'SplyActEver', 'SplyCur', 'PriceUSD']
+        metrics = ['ReferenceRateUSD',
+                   'CapMrktCurUSD', 'SplyActEver', 'SplyCur']
         asset_metrics = client.get_asset_metrics(
             assets=list(target_coins.keys()),
             metrics=metrics,
@@ -69,16 +83,23 @@ def fetch_data_from_coin_metrics(target_coins: dict) -> list:
                 datetime.today() -
                 timedelta(
                     days=1)).strftime('%Y-%m-%d'),
-            end_time=datetime.today().strftime('%Y-%m-%d'))
-        
+            end_time=(
+                datetime.today() -
+                timedelta(
+                    days=1)).strftime('%Y-%m-%d'),
+        )
+
         for coin_data in asset_metrics:
             if coin_data['asset'] in list(target_coins.keys()):
                 target_coins[coin_data['asset']].data_provider = 'CoinMetrics'
-                target_coins[coin_data['asset']].market_cap = float(coin_data['CapMrktCurUSD'])
-                target_coins[coin_data['asset']].circulating_supply = float(coin_data['SplyCur'])
-                target_coins[coin_data['asset']].total_supply = float(coin_data['SplyActEver'])
-                target_coins[coin_data['asset']].price = float(coin_data['PriceUSD'])
-
+                target_coins[coin_data['asset']].market_cap = float(
+                    coin_data['CapMrktCurUSD'] or 0)
+                target_coins[coin_data['asset']].circulating_supply = float(
+                    coin_data['SplyCur'] or 0)
+                target_coins[coin_data['asset']].total_supply = float(
+                    coin_data['SplyActEver'] or 0)
+                target_coins[coin_data['asset']].price = float(
+                    coin_data['ReferenceRateUSD'] or 0) 
 
     except Exception as e:
         print(e)
@@ -107,7 +128,8 @@ def fetch_data_from_crypto_compare(target_coins: dict) -> list:
             target_coins[coin_symbol].total_supply = data['RAW'][coin_symbol]['USD']['SUPPLY']
             target_coins[coin_symbol].twentyfourhour_volume = data['RAW'][coin_symbol]['USD']['TOTALVOLUME24H']
             target_coins[coin_symbol].price = data['RAW'][coin_symbol]['USD']['PRICE']
-            target_coins[coin_symbol].last_updated = datetime.utcfromtimestamp(int(data['RAW'][coin_symbol]['USD']['LASTUPDATE'])).strftime('%Y-%m-%d %H:%M:%S')
+            target_coins[coin_symbol].last_updated = datetime.utcfromtimestamp(
+                int(data['RAW'][coin_symbol]['USD']['LASTUPDATE'])).strftime('%Y-%m-%d %H:%M:%S')
 
     except Exception as e:
         print(e)
@@ -120,7 +142,8 @@ def fetch_data_from_on_chain_fx(target_coins: dict) -> list:
     try:
         messari = Messari()
 
-        asset_metric_df = messari.get_asset_metrics(asset_slugs=list(target_coins.keys()))
+        asset_metric_df = messari.get_asset_metrics(
+            asset_slugs=list(target_coins.keys()))
 
         for coin_id in list(target_coins.keys()):
             target_coins[coin_id].price = asset_metric_df['market_data_price_usd'][coin_id]

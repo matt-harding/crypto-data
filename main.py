@@ -22,6 +22,7 @@ def get_coin_ids(exchange_name: str) -> list:
             'paxos-standard': StableCoin(symbol='USDP', name='Pax Dollar', data_provider='CoinGecko'),
             'gemini-dollar': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='CoinGecko'),
             'true-usd': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='CoinGecko'),
+            'frax-share': StableCoin(symbol='FXS', name='Frax Share', data_provider='CoinGecko'),
         }
     elif exchange_name == 'CoinMarketCap':
         return {
@@ -32,6 +33,10 @@ def get_coin_ids(exchange_name: str) -> list:
             'USDP': StableCoin(symbol='USDP', name='Pax Dollar', data_provider='CoinMarketCap'),
             'GUSD': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='CoinMarketCap'),
             'TUSD': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='CoinMarketCap'),
+            'USDN': StableCoin(symbol='USDN', name='Neutrino Dollar', data_provider='CoinMarketCap'),
+            'FEI': StableCoin(symbol='FEI', name='Fei USD', data_provider='CoinMarketCap'),
+            'SNX': StableCoin(symbol='SNX', name='Synthetix USD', data_provider='CoinMarketCap'),
+            'CELO': StableCoin(symbol='CELO', name='Celo Dollar', data_provider='CoinMarketCap'),
         }
     elif exchange_name == 'CoinMetrics':
         return {
@@ -39,9 +44,23 @@ def get_coin_ids(exchange_name: str) -> list:
             'usdc': StableCoin(symbol='USDC', name='USD Coin', data_provider='CoinMetrics'),
             'busd': StableCoin(symbol='BUSD', name='Binance USD', data_provider='CoinMetrics'),
             'dai': StableCoin(symbol='DAI', name='Dai', data_provider='CoinMetrics'),
-            'frax': StableCoin(symbol='FRAX', name='FRAX', data_provider='CoinMetrics'),
+            #'frax': StableCoin(symbol='FRAX', name='FRAX', data_provider='CoinMetrics'),
+            #'xdb': StableCoin(symbol='XDB', name='DigitalBits', data_provider='CoinMetrics'),
+            #'usdp': StableCoin(symbol='USDP', name='Pax Dollar', data_provider='CoinMetrics'),
             'gusd': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='CoinMetrics'),
             'tusd': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='CoinMetrics'),
+            #'fxs': StableCoin(symbol='FXS', name='Frax Share', data_provider='CoinMetrics'),
+            #'ust': StableCoin(symbol='UST', name='TerraUSD', data_provider='CoinMetrics'),
+            # 'eurs': StableCoin(symbol='EURS', name='Stasis Euro', data_provider='CoinMetrics'),
+            #'usdn': StableCoin(symbol='USDN', name='Neutrino Dollar', data_provider='CoinMetrics'),
+            # 'fei': StableCoin(symbol='FEI', name='Fei USD', data_provider='CoinMetrics'),
+            'snx': StableCoin(symbol='SNX', name='Synthetix USD', data_provider='CoinMetrics'),
+            #'cusd': StableCoin(symbol='CUSDT', name='Celo Dollar', data_provider='CoinMetrics'),
+            #'sbd_steemdollars': StableCoin(symbol='SBD', name='Steem Dollars', data_provider='CoinMetrics'),
+            #'spa': StableCoin(symbol='SPA', name='Sperax', data_provider='CoinMetrics'),
+            #'digg': StableCoin(symbol='DIGG', name='DIGG', data_provider='CoinMetrics'),
+            #'esd': StableCoin(symbol='ESD', name='Empty Set Dollar', data_provider='CoinMetrics'),
+            #'dsd': StableCoin(symbol='DSD', name='Dynamic Set Dollar', data_provider='CoinMetrics'),
         }
     elif exchange_name == 'CryptoCompare':
         return {
@@ -51,8 +70,22 @@ def get_coin_ids(exchange_name: str) -> list:
             'DAI': StableCoin(symbol='DAI', name='Dai', data_provider='CryptoCompare'),
             'USDP': StableCoin(symbol='USDP', name='Pax Dollar', data_provider='CryptoCompare'),
             'FRAX': StableCoin(symbol='FRAX', name='FRAX', data_provider='CryptoCompare'),
+            'XDGB': StableCoin(symbol='XDGB', name='DigitalBits', data_provider='CryptoCompare'),
             'GUSD': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='CryptoCompare'),
             'TUSD': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='CryptoCompare'),
+            'FXS': StableCoin(symbol='FXS', name='Frax Share', data_provider='CryptoCompare'),
+            'USTC': StableCoin(symbol='USTC', name='TerraUSD', data_provider='CryptoCompare'),
+            'EURS': StableCoin(symbol='EURS', name='Stasis Euro', data_provider='CryptoCompare'),
+            'USDN': StableCoin(symbol='USDN', name='Neutrino Dollar', data_provider='CryptoCompare'),
+            'FEI': StableCoin(symbol='FEI', name='Fei USD', data_provider='CryptoCompare'),
+            'SNX': StableCoin(symbol='SNX', name='Synthetix USD', data_provider='CryptoCompare'),
+            'CELOUSD': StableCoin(symbol='CELOUSD', name='Celo Dollar', data_provider='CryptoCompare'),
+            'STEEMD': StableCoin(symbol='STEEMD', name='Steem Dollars', data_provider='CryptoCompare'),
+            'SPA': StableCoin(symbol='SPA', name='Sperax', data_provider='CryptoCompare'),
+            'DIGG': StableCoin(symbol='DIGG', name='DIGG', data_provider='CryptoCompare'),
+            'FLOAT': StableCoin(symbol='FLOAT', name='Float Protocol', data_provider='CryptoCompare'),
+            'ESD': StableCoin(symbol='ESD', name='Empty Set Dollar', data_provider='CryptoCompare'),
+            'DSD': StableCoin(symbol='DSD', name='Dynamic Set Dollar', data_provider='CryptoCompare'),
         }
     elif exchange_name == 'OnChainFX':
         return {
@@ -64,6 +97,14 @@ def get_coin_ids(exchange_name: str) -> list:
             'frax': StableCoin(symbol='FRAX', name='FRAX', data_provider='OnChainFX'),
             'gemini-dollar': StableCoin(symbol='GUSD', name='Gemini Dollar', data_provider='OnChainFX'),
             'tusd': StableCoin(symbol='TUSD', name='TrueUSD', data_provider='OnChainFX'),
+            'fxs': StableCoin(symbol='FXS', name='Frax Share', data_provider='OnChainFX'),
+            'terrausd': StableCoin(symbol='UST', name='TerraUSD', data_provider='OnChainFX'),
+            'stasis-euro': StableCoin(symbol='EURS', name='Stasis Euro', data_provider='OnChainFX'),
+            'neutrino-dollar': StableCoin(symbol='USDN', name='Neutrino Dollar', data_provider='OnChainFX'),
+            'fei-usd': StableCoin(symbol='FEI', name='Fei USD', data_provider='OnChainFX'),
+            'synthetix-usd': StableCoin(symbol='SNX', name='Synthetix USD', data_provider='OnChainFX'),
+            'celo-dollar': StableCoin(symbol='CUSDT', name='Celo Dollar', data_provider='OnChainFX'),
+            'steem-dollars': StableCoin(symbol='SBD', name='Steem Dollars', data_provider='OnChainFX')
         }
 
 
