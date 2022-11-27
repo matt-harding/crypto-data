@@ -150,9 +150,7 @@ def fetch_data_from_on_chain_fx(target_coins: dict) -> list:
             target_coins[coin_id].market_cap = asset_metric_df['marketcap_current_marketcap_usd'][coin_id]
             target_coins[coin_id].circulating_supply = asset_metric_df['supply_circulating'][coin_id]
             # # No other supply metrics return values
-            # target_coins[coin_id].total_supply = 'N/A'
-            # Note there is also prop 'market_data_real_volume_last_24_hours'
-            target_coins[coin_id].twentyfourhour_volume = asset_metric_df['market_data_volume_last_24_hours'][coin_id]
+            target_coins[coin_id].twentyfourhour_volume = asset_metric_df['market_data_real_volume_last_24_hours'][coin_id]
 
     except Exception as e:
         print(e)
