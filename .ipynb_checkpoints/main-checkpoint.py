@@ -5,7 +5,7 @@ from utils.data_providers import fetch_data_from_coin_gecko, fetch_data_from_coi
 TARGET_DATA_PROVIDERS = [
     'CoinGecko',
     'CoinMarketCap',
-    'CoinMetrics',
+    #'CoinMetrics',
     'CryptoCompare',
     'OnChainFX'
 ]
