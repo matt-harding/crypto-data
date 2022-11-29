@@ -110,5 +110,9 @@ Circulating supply can be defined as the supply that is currently in the hands o
 
 ## CryptoCompare
 
+* No Python Wrapper
+* Appears to have Order Book L1 & L2
+* Most coin coverage although not all fields available for all coins
+
 
 
